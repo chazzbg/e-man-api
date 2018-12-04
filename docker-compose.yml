@@ -1,0 +1,26 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5.5
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    ports:
+      - 33306:3306
+  rabbit:
+    image: rabbitmq:3
+  php:
+    build: .
+    volumes:
+      - .:/code
+    links:
+      - mysql
+      - rabbit
+  web:
+    image: nginx:latest
+    ports:
+      - 8080:80
+    volumes:
+      - .:/code
+      - ./site.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - php

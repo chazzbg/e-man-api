@@ -31,7 +31,7 @@ class DbCreateCommand extends Command
         $newConnection = $defaultConnection;
         $newConnection['database'] = '';
         App::make('config')->set('database.connections.init', $newConnection);
-        DB::connection('init')->statement('CREATE DATABASE IF NOT EXISTS ?');
+        DB::connection('init')->statement('CREATE DATABASE IF NOT EXISTS '.env('DB_DATABASE'));
         $this->call('migrate');
     }
 }

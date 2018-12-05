@@ -1,11 +1,11 @@
-##EMAN API
+## EMAN API
 
-###requirements
+### requirements
 - composer
 - docker
 - docker-compose
 
-###steps to run
+### steps to run
 
 - ```git clone https://github.com/chazzbg/e-man-api```
 

@@ -24,11 +24,7 @@ $router->group(['prefix' => 'api'], function ($router){
 
     $router->put('/location', 'LocationController@collect');
 
-    $router->get('/version', function ($clientVersion) {
+    $router->get('/version/{version}', 'VersionController@check');
 
-    });
-
-    $router->put('/version', function (\Illuminate\Http\Request $request) {
-
-    });
+    $router->put('/version', 'VersionController@publish');
 });

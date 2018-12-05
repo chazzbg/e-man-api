@@ -1,32 +1,38 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: chazz
- * Date: 12/5/18
- * Time: 12:45 AM
- *
- */
 
 namespace App\Http\Controllers;
 
-
+use App\Generator\UsernameGenerator;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Validation\Validator;
 
 class RegistrationController extends Controller
 {
 
     public function register(Request $request){
 
-        /** @var \Illuminate\Contracts\Validation\Factory $v */
-        $v = app('validator');
+        $rules = [
+            'username' => 'required|unique:users',
+            'email'    => 'required|unique:users',
+            'password' => 'required',
+        ];
+
+        $generator = UsernameGenerator::get();
+        $username  = $generator->generate($request->all());
+
+        $request->request->add(['username' => $username]);
+
         try {
-            $v->make(['username' => 'sdasd'], [
-                'username' => 'required|unique:users'
-            ])->validate();
+            $this->validate($request, $rules);
         } catch (ValidationException $e) {
-            dd($e->validator->getMessageBag());
+            return $e->getResponse();
         }
+
+        $data             = $request->all();
+        $data['password'] = Hash::make($data['password']);
+
+        return User::create($data);
     }
 }

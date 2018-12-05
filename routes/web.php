@@ -22,9 +22,7 @@ $router->group(['prefix' => 'api'], function ($router){
     /** @var \Laravel\Lumen\Routing\Router $router */
     $router->post('/register', 'RegistrationController@register');
 
-    $router->put('/location', function (\Illuminate\Http\Request $request) {
-
-    });
+    $router->put('/location', 'LocationController@collect');
 
     $router->get('/version', function ($clientVersion) {
 

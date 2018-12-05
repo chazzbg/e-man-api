@@ -2,9 +2,7 @@
 
 namespace App\Generator;
 
-use App\User;
-
 interface UsernameGeneratorInterface
 {
-    public function generate(User $user);
+    public function generate(array $data);
 }

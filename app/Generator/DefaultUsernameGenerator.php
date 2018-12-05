@@ -2,14 +2,11 @@
 
 namespace App\Generator;
 
-use App\User;
-use Illuminate\Support\Facades\Hash;
-
 class DefaultUsernameGenerator implements UsernameGeneratorInterface
 {
 
-    public function generate(User $user)
+    public function generate(array  $data)
     {
-
+        return preg_replace('/\W+/', '_', $data['email']);
     }
 }

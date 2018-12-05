@@ -1,0 +1,36 @@
+
+POST http://localhost:8080/api/register
+Content-Type: application/x-www-form-urlencoded
+X-Requested-With:XMLHttpRequest
+
+email=some.one@reasdh.to&password=secureftw
+###
+
+
+POST http://localhost:8080/api/location
+Content-Type: application/x-www-form-urlencoded
+X-Requested-With:XMLHttpRequest
+
+id=123&lat=24.123456&lng=43.123456&elevation=645.32&_method=PUT
+###
+
+
+POST http://localhost:8080/api/version
+Content-Type: application/x-www-form-urlencoded
+X-Requested-With:XMLHttpRequest
+
+version=1.0.0&_method=PUT
+###
+
+POST http://localhost:8080/api/version
+Content-Type: application/x-www-form-urlencoded
+X-Requested-With:XMLHttpRequest
+
+version=1.2.3&_method=PUT
+###
+
+GET http://localhost:8080/api/version/1.2.0
+X-Requested-With:XMLHttpRequest
+
+###
+

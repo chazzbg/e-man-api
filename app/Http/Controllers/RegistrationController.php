@@ -14,21 +14,19 @@ class RegistrationController extends Controller
     public function register(Request $request){
 
         $rules = [
-            'username' => 'required|unique:users',
             'email'    => 'required|unique:users',
             'password' => 'required',
         ];
-
-        $generator = UsernameGenerator::get();
-        $username  = $generator->generate($request->all());
-
-        $request->request->add(['username' => $username]);
-
         try {
             $this->validate($request, $rules);
         } catch (ValidationException $e) {
             return $e->getResponse();
         }
+
+        $generator = UsernameGenerator::get();
+        $username  = $generator->generate($request->all());
+
+        $request->request->add(['username' => $username]);
 
         $data             = $request->all();
         $data['password'] = Hash::make($data['password']);
